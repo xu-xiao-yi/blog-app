@@ -1,0 +1,195 @@
+/* 字体设置 */
+p {
+	font-size: 15px;
+	line-height: 18px;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 600;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.sub-title {
+	font-size: 16px;
+	font-weight: 500;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.meta {
+	font-size: 12px;
+	color: #b4b4b4;
+}
+
+/* ---------主题设置----------- */
+.primary-fill {
+	background-color: #009688;
+	color: #fff;
+}
+
+.primary-border {
+	border: 1px solid #009688;
+	color: #009688;
+}
+
+.warning-fill {
+	background-color: #fb8c00;
+	color: #fff;
+}
+
+.warning-border {
+	border: 1px solid #fb8c00;
+	color: #fb8c00;
+}
+
+.success-fill {
+	background-color: #4caf50;
+	color: #fff;
+}
+
+.success-border {
+	border: 1px solid #4caf50;
+	color: #4caf50;
+}
+
+.disable-fill {
+	background-color: #e0e0e0;
+	color: #fff;
+}
+
+.disable-border {
+	border: 1px solid #e0e0e0;
+	color: #e0e0e0;
+}
+
+.dark-fill {
+	background-color: #555555;
+	color: #fff;
+}
+
+.dark-border {
+	border: 1px solid #555555;
+	color: #555555;
+}
+
+/* --------------按钮设置------------ */
+.btn {
+	border: none;
+	cursor: pointer;
+	margin: 5px;
+	width: 120px;
+	height: 35px;
+}
+
+.btn-lg {
+	/* width: 140px; */
+	height: 40px;
+}
+
+.btn-rd {
+	border-radius: 20px;
+}
+
+.btn-circle {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+/* 表单元素样式 */
+.input-box {
+	display: block;
+	width: 90%;
+	border: 1px solid darkcyan;
+	border-radius: 5px;
+	height: 40px;
+	margin: 10px;
+}
+
+/* 阴影样式 */
+.shadow {
+	box-shadow: 2px 5px 10px #aaa;
+}
+
+/* 头像样式 */
+.avatar-xs {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+
+.avatar-lg {
+	display: inline-block;
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+}
+
+.avatar-xs,
+.avatar-lg:hover {
+	cursor: pointer;
+}
+
+/* 图片缩略样式 */
+.thumnail-xs{
+	width: 180px;
+	height: 180px;
+	border-radius: 10px;
+}
+
+.thumnail-lg{
+	width: 220px;
+	height: 300px;
+	border-radius: 10px;
+}
+
+/* 导航条 */
+.nav {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+}
+
+.nav-bar {
+	width: 80%;
+	margin: 0 auto;
+	height: 70px;
+}
+
+.nav-list {
+	width: 60%;
+	text-align: left;
+}
+
+.nav-item {
+	display: inline-block;
+}
+.nav-item img{
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+}
+.nav-item a {
+	display: inline-block;
+	width: 100px;
+	height: 35px;
+	margin-right: 5px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #fff;
+	text-align: center;
+	line-height: 35px;
+	letter-spacing: 3px;
+}
+
+.nav-right {
+	float: right;
+}
+
+/* 边框 */
+.border{
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
