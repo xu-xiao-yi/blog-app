@@ -6,8 +6,8 @@ import Article from '@/views/Article.vue'
 import Topic from '@/views/Topic.vue'
 import ArticleDetail from '@/views/ArticleDetail.vue'
 import TopicDetail from '@/views/TopicDetail.vue'
-import User from '@/views/User.vue'
-import Profile from '@/views/Profile.vue'
+import UserDetail from '@/views/UserDetail.vue'
+import Users from '@/views/Users.vue'
 import SignIn from '@/views/SignIn.vue'
 import Basic from '@/views/Basic.vue'
 import Setting from '@/views/Setting.vue'
@@ -27,23 +27,31 @@ const routes = [{
 			},
 			{
 				path: 'article',
-				component: Article
+				component: Article,
+			},
+			{
+				path: 'article/:id',
+				component: ArticleDetail
 			},
 			{
 				path: 'topic',
 				component: Topic
 			},
+			{
+				path: 'topic/:id',
+				component: TopicDetail
+			},
 
 			{
-				path: 'user',
-				component: User
+				path: 'users',
+				component: Users
 			},
 			{
-				path: 'profile',
-				component: Profile,
+				path: 'user/:id',
+				component: UserDetail,
 				children: [{
 						path: '/',
-						redirect: 'basic'
+						redirect: 'user/:id'
 					},
 					{
 						path: 'basic',

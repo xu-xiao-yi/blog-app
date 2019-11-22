@@ -5,14 +5,7 @@
 	padding: 0;
 }
 
-/* body {
-	font: 14px/1 "PingFang SC", "Microsoft YaHei", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
- */
 img {
-	/* display: block; */
 	border: none;
 }
 
@@ -107,14 +100,15 @@ a:active {
 }
 
 /* 居中定位 */
-.abs-center{
+.abs-center {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 }
+
 /* 垂直居中,水平居右 */
-.abs-center-right{
+.abs-center-right {
 	position: absolute;
 	left: 82%;
 	top: 50%;
@@ -155,6 +149,7 @@ a:active {
 .flex-left {
 	justify-content: flex-start;
 }
+
 .flex-right {
 	justify-content: flex-end;
 }
@@ -184,7 +179,8 @@ a:active {
 .row {
 	display: flex;
 	flex-wrap: wrap;
-	min-height: 50px;
+	align-items: flex-start;
+	padding: 10px;
 }
 
 .col-12 {
@@ -258,6 +254,11 @@ a:active {
 }
 
 /* 链接样式 */
-.link{
+.link {
 	cursor: pointer;
+}
+
+/* 间距 */
+.gutter {
+	margin-right: 10px;
 }

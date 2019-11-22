@@ -3,10 +3,9 @@
 		<div class="row">
 			<div class="col-3" v-for="(item, index) in topics" :key="index">
 				<div class="card link shadow">
-					<img :src="item.logo" />
-					<p class="title">{{item.topicName}}</p>
-					<p class="title">{{item.decscription}}</p>
-					
+					<router-link :to="{ path: '/topic/' + item.id }"><img :src="item.logo" class="logo" /></router-link>
+					<p class="sub-title">{{ item.topicName }}</p>
+					<p class="meta">{{ item.description }}</p>
 				</div>
 			</div>
 		</div>
@@ -22,23 +21,25 @@
 							<p>{{ item.topicName }}</p>
 						</div>
 						<div class="media-middle">
-							<p class="sub-title link">{{ item.article.title }}</p>
-							<p>{{ item.article.summary }}</p>
+							<router-link :to="{ path: '/article/' + item.id }">
+								<p>{{ item.title }}</p>
+							</router-link>
+							<p class="sub-title link">{{ item.summary }}</p>
 							<p>
-								<span class="meta">{{ item.article.comments }}评论</span>
-								<span class="meta">{{ item.article.likes }}喜欢</span>
+								<span class="meta">{{ item.comments }}评论</span>
+								<span class="meta">{{ item.likes }}喜欢</span>
 							</p>
 						</div>
-						<div class="media-right"><img :src="item.article.thumbnail" alt="" /></div>
+						<div class="media-right"><img :src="item.thumbnail" alt="" /></div>
 					</div>
 				</div>
 			</div>
 			<div class="col-4 border">
 				<h2>热门作者</h2>
 				<div v-for="(item, index) in users" :key="index" class="row border">
-					<img :src="item.avatar" class="avatar-lg link">
+					<img :src="item.avatar" class="avatar-lg link" />
 					<p class="col-6">{{ item.nickname }}</p>
-					<p class="col-3">{{item.fans}}个粉丝</p>
+					<p class="col-3">{{ item.fans }}个粉丝</p>
 				</div>
 			</div>
 		</div>
@@ -55,15 +56,15 @@ export default {
 		};
 	},
 	created() {
-		this.axios.get(this.baseURL + '/article').then(res => {
+		this.axios.get(this.GLOBAL.baseUrl + '/article').then(res => {
 			console.log(res.data.data);
 			this.articles = res.data.data;
 		});
-		this.axios.get(this.baseURL + '/user').then(res => {
+		this.axios.get(this.GLOBAL.baseUrl + '/user').then(res => {
 			console.log(res.data.data);
 			this.users = res.data.data;
 		});
-		this.axios.get(this.baseURL + '/topic').then(res => {
+		this.axios.get(this.GLOBAL.baseUrl + '/topic').then(res => {
 			console.log(res.data.data);
 			this.topics = res.data.data;
 		});
@@ -72,38 +73,11 @@ export default {
 </script>
 
 <style scoped="scoped">
-.media-wraaper {
-	display: flex;
-	height: 200px;
-	margin: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	padding: 5px;
-}
-.media-left {
-	flex: 1 1 15%;
-}
-.media-middle {
-	flex: 1 1 65%;
-}
-.media-right {
-	flex: 1 1 20%;
-}
-.media-right img {
-	width: 80%;
-	height: 80%;
-}
-.card{
-	width: 90%;
-	height: 200px;
-	border:1px solid #eee;
-	border-radius: 5px;
-	margin: 5px;
-}
-.card img{
-	width: 100%;
-	height: 60%;
+.logo {
 	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.logo:hover{
+	opacity: 0.6;
 }
 </style>

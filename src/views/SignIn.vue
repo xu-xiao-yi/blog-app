@@ -22,7 +22,9 @@ export default {
 				password: '',
 				code: ''
 			},
-			codeUrl: ''
+			codeUrl: '',
+			token: this.GLOBAL.token,
+			user: this.GLOBAL
 		};
 	},
 	created() {
@@ -31,16 +33,25 @@ export default {
 	},
 	methods: {
 		signIn(userDto) {
-			this.axios.post(this.baseURL + '/user/sign-in', JSON.stringify(this.userDto)).then(res => {
-				if (res.data.msg === '成功') {
-					alert('登录成功')
-					localStorage.setItem('user', JSON.stringify(res.data.data));
-					this.$router.push('/');
-				}else{
-					alert(res.data.msg)
-					this.userDto.code = ''
-				}
-			});
+			// var Cookies = require('js-cookie')
+			// let sessionId = this.Cookies.get('JSESSIONID');
+			// this.axios({
+			// 	method: 'post',
+			// 	url: 'http://localhost:8080/api/user/sign-in',
+			// 	data: JSON.stringify(this.userDto),
+			// 	param: {
+			// 		SessionId: sessionId
+			// 	}
+			// }).then(res => {
+			// 	if (res.data.msg === '成功') {
+			// 		alert('登录成功');
+			// 		localStorage.setItem('user', JSON.stringify(res.data.data));
+			// 		this.$router.push('/');
+			// 	} else {
+			// 		alert(res.data.msg);
+			// 		this.userDto.code = '';
+			// 	}
+			// });
 		},
 		refresh() {
 			this.codeUrl = '';
