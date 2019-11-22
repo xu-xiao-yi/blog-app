@@ -1,23 +1,23 @@
 <template>
 	<div>
 		<div class="nav primary-fill shadow">
-			<div class="nav-bar flex flex-between">
-				<ul class="nav-list">
+			<div class="nav-bar">
+				<ul class="nav-list flex-around">
 					<li class="nav-item"><router-link to="/index">主页</router-link></li>
-					<li class="nav-item"><router-link to="/topic">专题</router-link></li>
-					<li class="nav-item"><router-link to="/article">文章</router-link></li>
-					<li class="nav-item"><router-link to="/user">作者</router-link></li>
-				</ul>
-				<ul v-if="!this.user" class="navnav-right">
-					<li class="nav-item"><router-link to="/download">下载APP</router-link></li>
-					<li class="nav-item"><router-link to="/sign-in">登录</router-link></li>
-				</ul>
-				<ul v-if="this.user" class="nav-right">
-					<img :src="user.avatar" @mouseenter="this.show = true" class="avatar-lg abs-center-right"/>
-					<li class="nav-item"><a class="link" @click="logout">退出</a></li>
+					<li class="nav-item"><router-link to="/topics">专题</router-link></li>
+					<li class="nav-item"><router-link to="/articles">文章</router-link></li>
+					<li class="nav-item"><router-link to="/users">作者</router-link></li>
+					<li class="nav-item">
+						<input type="text" class="input-box" placeholder="搜索" v-model="keywords"/>
+					</li>
+					<li class="nav-item">
+						<button class="btn btn-rd dark-fill" @click="search">搜索</button>
+					</li>
+					<li class="nav-item"  v-if="!this.user"><router-link to="/sign-in">登录</router-link></li>
+					<li class="nav-item"  v-if="this.user"><img :src="user.avatar" @mouseenter="this.show = true" class="avatar-lg abs-center-right" /></li>
+					<li class="nav-item"  v-if="this.user"><li class="nav-item"><a class="link" @click="logout">退出</a></li></li>
 				</ul>
 			</div>
-			<div class="dropdown shadow" v-if="show"></div>
 		</div>
 		<router-view class="container" />
 	</div>
@@ -27,15 +27,25 @@ export default {
 	data() {
 		return {
 			user: JSON.parse(localStorage.getItem('user')),
-			dialog: false,
-			show: false
+			keywords:''
 		};
 	},
-	created: function() {},
+	created() {
+	},
 	methods: {
 		logout() {
 			this.user = null;
 			localStorage.clear();
+		},
+		search(){
+			let currentPath = this.$route.path
+			// this.GLOBAL.keywords = this.keywords
+			// console.log(this.GLOBAL.keywords)
+			if(currentPath !='/articles'){
+				this.$router.push({path:'articles',query:{keywords:this.keywords}})
+			}else{
+				this.$router.push({path:'empty',query:{keywords:this.keywords}})
+		}
 		}
 	}
 };
@@ -48,14 +58,5 @@ export default {
 }
 .container {
 	margin-top: 80px;
-}
-.dropdown {
-	position: absolute;
-	right: 110px;
-	top: 65px;
-	background-color: #fff;
-	width: 120px;
-	height: 220px;
-	border-radius: 5px;
 }
 </style>

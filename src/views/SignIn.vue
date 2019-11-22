@@ -1,5 +1,6 @@
 <template>
 	<div id="bg">
+		<router-link to="/">首页</router-link>
 		<div class="login-box">
 			<form class="login-form">
 				<input type="text" v-model="userDto.mobile" id="mobile" />
@@ -8,12 +9,14 @@
 					<input type="text" v-model="userDto.code" class="code" />
 					<img :src="this.codeUrl" class="verify" @click="refresh" />
 				</div>
-				<input type="button" class="btn btn-lg warning-fill" value="登录" @click="signIn(userDto)" />
+				<input type="button" class="btn btn-lg dark-fill" value="登录" @click="signIn(userDto)" />
+				<router-link to="/sign-up">没有账号？去注册</router-link>
 			</form>
 		</div>
 	</div>
 </template>
 <script>
+import {getCookie} from '@/util/util.js'
 export default {
 	data() {
 		return {
@@ -22,41 +25,42 @@ export default {
 				password: '',
 				code: ''
 			},
-			codeUrl: '',
-			token: this.GLOBAL.token,
-			user: this.GLOBAL
+			codeUrl: ''
 		};
 	},
 	created() {
 		var number = Math.ceil(Math.random() * 10);
-		this.codeUrl = this.baseURL + '/code?num = ' + number;
+		this.codeUrl = this.GLOBAL.baseUrl + '/code?num = ' + number;
 	},
 	methods: {
 		signIn(userDto) {
-			// var Cookies = require('js-cookie')
-			// let sessionId = this.Cookies.get('JSESSIONID');
-			// this.axios({
-			// 	method: 'post',
-			// 	url: 'http://localhost:8080/api/user/sign-in',
-			// 	data: JSON.stringify(this.userDto),
-			// 	param: {
-			// 		SessionId: sessionId
-			// 	}
-			// }).then(res => {
-			// 	if (res.data.msg === '成功') {
-			// 		alert('登录成功');
-			// 		localStorage.setItem('user', JSON.stringify(res.data.data));
-			// 		this.$router.push('/');
-			// 	} else {
-			// 		alert(res.data.msg);
-			// 		this.userDto.code = '';
-			// 	}
-			// });
+			const token = getCookie('JSESSIONID');
+			console.log(token);
+			this.axios({
+				method: 'post',
+				url: this.GLOBAL.baseUrl + '/user/sign-in',
+				data: JSON.stringify(this.userDto),
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				params: {
+					token: token
+				}
+			}).then(res => {
+				if (res.data.msg === '成功') {
+					alert('登录成功');
+					localStorage.setItem('user', JSON.stringify(res.data.data));
+					this.$router.push('/');
+				} else {
+					alert(res.data.msg);
+					this.userDto.code = '';
+				}
+			});
 		},
 		refresh() {
 			this.codeUrl = '';
 			var number = Math.ceil(Math.random() * 10);
-			this.codeUrl = this.baseURL + '/code?num = ' + number;
+			this.codeUrl = this.GLOBAL.baseUrl + '/code?num = ' + number;
 		}
 	}
 };

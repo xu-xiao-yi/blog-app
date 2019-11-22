@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2>专题</h2>
+		<h2>所有专题</h2>
 	</div>
 </template>
 

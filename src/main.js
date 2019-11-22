@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import {getCookie} from '@/util/util'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -10,7 +11,6 @@ Vue.prototype.GLOBAL = global_
 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
-
 
 new Vue({
 	router,

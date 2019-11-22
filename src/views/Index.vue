@@ -57,15 +57,15 @@ export default {
 	},
 	created() {
 		this.axios.get(this.GLOBAL.baseUrl + '/article').then(res => {
-			console.log(res.data.data);
+			// console.log(res.data.data);
 			this.articles = res.data.data;
 		});
 		this.axios.get(this.GLOBAL.baseUrl + '/user').then(res => {
-			console.log(res.data.data);
+			// console.log(res.data.data);
 			this.users = res.data.data;
 		});
 		this.axios.get(this.GLOBAL.baseUrl + '/topic').then(res => {
-			console.log(res.data.data);
+			// console.log(res.data.data);
 			this.topics = res.data.data;
 		});
 	}

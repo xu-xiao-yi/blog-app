@@ -1,14 +1,10 @@
 <script>
-const baseUrl = 'http://localhost:8080/api';
-const token = '12345678';
-const user = {
-	mobile: '13951905171',
-	nickname: '董克平',
-	avatar: 'https://upload.jianshu.io/users/upload_avatars/9988193/fc26c109-1ae6-4327-a298-2def343e9cd8.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180'
-};
+const baseUrl = 'http://localhost:8080/api'
+const frontServer = 'http://localhost:9090/#'
+const keywords = ''
 export default {
 	baseUrl,
-	token,
-	user
+	frontServer,
+	keywords
 };
 </script>
