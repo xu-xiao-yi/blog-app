@@ -1,10 +1,8 @@
 <script>
 const baseUrl = 'http://localhost:8080/api'
-const frontServer = 'http://localhost:9090/#'
-const keywords = ''
+const token = ''
 export default {
 	baseUrl,
-	frontServer,
-	keywords
+	token
 };
 </script>

@@ -16,7 +16,6 @@
 	</div>
 </template>
 <script>
-import {getCookie} from '@/util/util.js'
 export default {
 	data() {
 		return {
@@ -25,17 +24,22 @@ export default {
 				password: '',
 				code: ''
 			},
-			codeUrl: ''
+			codeUrl: '',
+			sessionId:''
 		};
 	},
 	created() {
 		var number = Math.ceil(Math.random() * 10);
 		this.codeUrl = this.GLOBAL.baseUrl + '/code?num = ' + number;
+		this.sessionId = this.$VueCookies.get('JSESSIONID') 
+		console.log(this.sessionId)
 	},
 	methods: {
 		signIn(userDto) {
-			const token = getCookie('JSESSIONID');
-			console.log(token);
+			var d = this.$document.cookie
+			console.log(JSON.stringify(d))
+			// const token = this.getCookie('JSESSIONID');
+			// console.log(token);
 			this.axios({
 				method: 'post',
 				url: this.GLOBAL.baseUrl + '/user/sign-in',
@@ -44,7 +48,7 @@ export default {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
 				params: {
-					token: token
+					token: '123'
 				}
 			}).then(res => {
 				if (res.data.msg === '成功') {
@@ -61,6 +65,24 @@ export default {
 			this.codeUrl = '';
 			var number = Math.ceil(Math.random() * 10);
 			this.codeUrl = this.GLOBAL.baseUrl + '/code?num = ' + number;
+		},
+		//  setCookie(name,value){
+		//     var Days = 1;
+		//     var exp = new Date();
+		//     exp.setTime(exp.getTime() + Days*24*60*60*1000);
+		//     document.cookie = name + "="+ encodeURI (value) + ";expires=" + exp.toGMTString()+";path=/leasingCalculator";
+		// },
+		getCookie(name) {
+			//获取指定名称的cookie的值
+			console.log(document.cookie)
+			let arrStr = document.cookie.split(',');
+			console.log(arrStr)
+			for (var i = 0; i < arrStr.length; i++) {
+				var temp = arrStr[i].split('=');
+				if (temp[0] == name) {
+					return decodeURI(temp[1]);
+				}
+			}
 		}
 	}
 };

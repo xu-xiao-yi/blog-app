@@ -38,14 +38,16 @@ export default {
 			localStorage.clear();
 		},
 		search(){
+			
+			// this.$router.push({path:'search',query:{keywords:this.keywords}})
+			
 			let currentPath = this.$route.path
-			// this.GLOBAL.keywords = this.keywords
-			// console.log(this.GLOBAL.keywords)
-			if(currentPath !='/articles'){
-				this.$router.push({path:'articles',query:{keywords:this.keywords}})
+			alert(currentPath)
+			if(currentPath!='/search'||currentPath!='/search/article'||currentPath!='/search/topic'||currentPath!='/search/usere'){
+				this.$router.push({path:'/search',query:{keywords:this.keywords}})
 			}else{
-				this.$router.push({path:'empty',query:{keywords:this.keywords}})
-		}
+				this.$router.push({path:'/empty',query:{keywords:this.keywords}})
+	   	}
 		}
 	}
 };

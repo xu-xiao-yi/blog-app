@@ -11,7 +11,7 @@ export default {
 	},
 	mounted() {
 		this.keywords = this.$route.query.keywords
-		this.$router.push({ path: 'articles', query: { keywords: this.keywords } });
+		this.$router.push({ path: '/search', query: { keywords: this.keywords } });
 	}
 };
 </script>

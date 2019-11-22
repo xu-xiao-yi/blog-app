@@ -24,8 +24,6 @@
 				<div class="media-right"><img :src="item.thumbnail" /></div>
 			</div>
 		</div>
-
-		<div class="col-12"><button class="btn btn-lg warning-fill" @click="loadMore">点击加载更多</button></div>
 	</div>
 </template>
 
@@ -34,16 +32,16 @@ export default {
 	data() {
 		return {
 			articles: [],
-			currentPage: 1,
-			count: 5
+			keywords: ''
 		};
 	},
 	created() {
+		this.keywords = this.$route.query.keywords;
+		console.log(this.keywords);
 		this.axios
 			.get(this.GLOBAL.baseUrl + '/article', {
 				params: {
-					page: this.currentPage,
-					count: this.count
+					keywords: this.keywords
 				}
 			})
 			.then(res => {
@@ -51,28 +49,7 @@ export default {
 				this.articles = res.data.data;
 			});
 	},
-	methods: {
-		loadMore() {
-			this.currentPage = this.currentPage + 1;
-			this.axios
-				.get(this.GLOBAL.baseUrl + '/article', {
-					params: {
-						page: this.currentPage,
-						count: this.count
-					}
-				})
-				.then(res => {
-					console.log(res.data.data.length);
-					let temp = [];
-					temp = res.data.data;
-					for (var i = 0; i < temp.length; i++) {
-						this.articles.splice(this.currentPage * this.count, 0, temp[i]);
-					}
-					console.log(this.articles.length);
-				});
-		}
-	}
+	methods: {}
 };
 </script>
-
-<style scoped="scoped"></style>
+<style></style>
