@@ -7,10 +7,6 @@ import VueAxios from 'vue-axios'
 import global_ from '@/util/Global'
 Vue.prototype.GLOBAL = global_
 
-//cookie插件
-import VueCookies from 'vue-cookies'
-Vue.use(VueCookies)
-
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 

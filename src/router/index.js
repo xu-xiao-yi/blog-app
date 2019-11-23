@@ -37,7 +37,6 @@ const routes = [{
 			},
 			{
 				path: 'articles',
-				name: 'my-articles',
 				component: Articles
 			},
 			{
@@ -59,20 +58,7 @@ const routes = [{
 			},
 			{
 				path: 'user/:id',
-				component: UserDetail,
-				children: [{
-						path: '/',
-						redirect: 'user/:id'
-					},
-					{
-						path: 'basic',
-						component: Basic
-					},
-					{
-						path: 'setting',
-						component: Setting
-					}
-				]
+				component: UserDetail
 			},
 			{
 					path :'search',

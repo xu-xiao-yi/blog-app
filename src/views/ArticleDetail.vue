@@ -1,16 +1,16 @@
 <template>
 	<div class="container border">
-		<h2 class="title">{{ articleVo.title }}</h2>
+		<h2 class="title">{{ articleVo.article.title }}</h2>
 		<div class="box">
-			<img :src="articleVo.avatar" class="avatar-xs" />
-			<span class="meta gutter">{{ articleVo.nickname }}</span>
+			<img :src="articleVo.author.avatar" class="avatar-xs" />
+			<span class="meta gutter">{{ articleVo.author.nickname }}</span>
 			<span class="meta gutter">
-				{{ articleVo.createTime.date.year }}年{{ articleVo.createTime.date.month }}月{{ articleVo.createTime.date.day }}日 {{ articleVo.createTime.time.hour }}:{{
-					articleVo.createTime.time.minute
-				}}:{{ articleVo.createTime.time.second }}
+				{{ articleVo.article.createTime.date.year }}年{{ articleVo.article.createTime.date.month }}月{{ articleVo.article.createTime.date.day }}日 {{ articleVo.article.createTime.time.hour }}:{{
+					articleVo.article.createTime.time.minute
+				}}:{{ articleVo.article.createTime.time.second }}
 			</span>
 		</div>
-		<div v-html="articleVo.content"></div>
+		<div v-html="articleVo.article.content"></div>
 	</div>
 </template>
 

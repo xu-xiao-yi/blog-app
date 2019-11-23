@@ -20,22 +20,24 @@
 				<div v-for="(item, index) in articles" :key="index" class="col-12">
 					<div class="media-wraaper border">
 						<div class="media-left">
-							<img :src="item.avatar" class="avatar-lg link" />
-							<p>{{ item.nickname }}</p>
+							<router-link :to="{ path: '/user/' + item.article.userId }">
+							<img :src="item.author.avatar" class="avatar-lg link" />
+							</router-link>
+							<p>{{ item.author.nickname }}</p>
 							<strong>来自</strong>
-							<p>{{ item.topicName }}</p>
+							<p>{{ item.topic.topicName }}</p>
 						</div>
 						<div class="media-middle flex flex-around flex-left">
-							<router-link :to="{ path: '/article/' + item.id }" class="subtitle">
-								 {{ item.title }} 
+							<router-link :to="{ path: '/article/' + item.article.id }" class="subtitle">
+								 {{ item.article.title }} 
 							</router-link>
-							<p class="sub-title link">{{ item.summary }}</p>
+							<p class="sub-title link">{{ item.article.summary }}</p>
 							<p>
-								<span class="meta gutter">{{ item.comments }}评论</span>
-								<span class="meta">{{ item.likes }}喜欢</span>
+								<span class="meta gutter">{{ item.article.comments }}评论</span>
+								<span class="meta">{{ item.article.likes }}喜欢</span>
 							</p>
 						</div>
-						<div class="media-right"><img :src="item.thumbnail" alt="" /></div>
+						<div class="media-right"><img :src="item.article.thumbnail" alt="" /></div>
 					</div>
 				</div>
 			</div>
@@ -44,7 +46,9 @@
 				<div v-for="(item, index) in users" :key="index" class="row">
 					<div class="col-12 border box">
 						<div class="flex-center-y">
+							<router-link :to="{ path: '/user/' + item.id }">
 							<img :src="item.avatar" class="avatar-xs link" />
+							</router-link>
 							<p class="sub-title">{{ item.nickname }}</p>
 						</div>
 						<div class="flex-center-y">

@@ -4,13 +4,13 @@
 			<div class="col-8">
 				<div class="row border-bottom">
 					<div class="col-3">
-						<img :src="topicVo.logo" class="avatar-lg" />
-						<p class="title">{{ topicVo.topicName }}</p>
+						<img :src="topicVo.topic.logo" class="avatar-lg" />
+						<p class="title">{{ topicVo.topic.topicName }}</p>
 					</div>
 					<div class="col-6">
 						<p>
-							<span class="sub-title">{{ topicVo.articles }}篇文章,</span>
-							<span class="sub-title">{{ topicVo.follows }}人关注</span>
+							<span class="sub-title">{{ topicVo.topic.articles }}篇文章,</span>
+							<span class="sub-title">{{ topicVo.topic.follows }}人关注</span>
 						</p>
 					</div>
 					<div class="col-3"><button class="btn btn-lg btn-rd warning-fill">关注</button></div>
@@ -20,20 +20,20 @@
 					<div v-for="(item, index) in topicVo.articleList" :key="index" class="col-12 border-bottom">
 						<div class="media-wraaper">
 							<div class="media-left">
-								<img :src="item.avatar" class="avatar-lg link" />
-								<p>{{ item.nickname }}</p>
+								<img :src="item.author.avatar" class="avatar-lg link" />
+								<p>{{ item.author.nickname }}</p>
 							</div>
 							<div class="media-middle">
-								<router-link :to="{ path: '/article/' + item.id }">
-									<p>{{ item.title }}</p>
+								<router-link :to="{ path: '/article/' + item.article.id }">
+									<p>{{ item.article.title }}</p>
 								</router-link>
-								<p class="sub-title link">{{ item.summary }}</p>
+								<p class="sub-title link">{{ item.article.summary }}</p>
 								<p>
-									<span class="meta gutter">{{ item.comments }}评论</span>
-									<span class="meta">{{ item.likes }}喜欢</span>
+									<span class="meta gutter">{{ item.article.comments }}评论</span>
+									<span class="meta">{{ item.article.likes }}喜欢</span>
 								</p>
 							</div>
-							<div class="media-right"><img :src="item.thumbnail" alt="" /></div>
+							<div class="media-right"><img :src="item.article.thumbnail" alt="" /></div>
 						</div>
 					</div>
 				</dir>
@@ -41,16 +41,16 @@
 			<div class="col-4">
 				<div class="box border-bottom">
 					<p class="title">专题公告</p>
-					<p class="sub-title">{{ topicVo.description }}</p>
+					<p class="sub-title">{{ topicVo.topic.description }}</p>
 					<p>
-						<a :href="topicVo.homepage">{{ topicVo.homepage }}</a>
+						<a :href="topicVo.homepage">{{ topicVo.topic.homepage }}</a>
 					</p>
 				</div>
 				<div class="box border-bottom"><p>分享到:微博、微信</p></div>
 				<div class="box border-bottom">
 					<p class="sub-title">管理员</p>
-					<img :src="topicVo.avatar" class="avatar-xs" />
-					<p>{{ topicVo.nickname }}</p>
+					<img :src="topicVo.admin.avatar" class="avatar-xs" />
+					<p>{{ topicVo.admin.nickname }}</p>
 				</div>
 				<div class="box border-bottom">
 					<p class="sub-title">关注的人</p>

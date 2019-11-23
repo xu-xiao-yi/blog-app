@@ -5,7 +5,9 @@
 				<div class="card shadow flex flex-top-y">
 					<div class="card-head flex flex-center">
 						<p class="title">{{ item.nickname }}</p>
+							<router-link :to="{ path: '/user/' + item.id }">
 						<img :src="item.avatar" />
+						</router-link>
 					</div>
 					<div class="card-body flex flex-left">
 						<p class="sub-title">{{ item.introduction }}</p>

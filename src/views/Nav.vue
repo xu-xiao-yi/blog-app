@@ -7,15 +7,13 @@
 					<li class="nav-item"><router-link to="/topics">专题</router-link></li>
 					<li class="nav-item"><router-link to="/articles">文章</router-link></li>
 					<li class="nav-item"><router-link to="/users">作者</router-link></li>
-					<li class="nav-item">
-						<input type="text" class="input-box" placeholder="搜索" v-model="keywords"/>
-					</li>
-					<li class="nav-item">
-						<button class="btn btn-lg btn-rd dark-border" @click="search">搜索</button>
-					</li>
-					<li class="nav-item"  v-if="!this.user"><router-link to="/sign-in">登录</router-link></li>
-					<li class="nav-item"  v-if="this.user"><img :src="user.avatar" @mouseenter="this.show = true" class="avatar-lg abs-center-right" /></li>
-					<li class="nav-item"  v-if="this.user"><li class="nav-item"><a class="link" @click="logout">退出</a></li></li>
+					<li class="nav-item"><input type="text" class="input-box" placeholder="搜索" v-model="keywords" /></li>
+					<li class="nav-item"><button class="btn btn-lg btn-rd dark-border" @click="search">搜索</button></li>
+					<li class="nav-item" v-if="!this.user"><router-link to="/sign-in">登录</router-link></li>
+					<!-- <li class="nav-item" v-if="this.user"> -->
+						<router-link :to="{ path: '/user/' + user.id }" v-if="this.user"><img :src="user.avatar" @mouseenter="this.show = true" class="avatar-lg abs-center-right" /></router-link>
+					<!-- </li> -->
+					<li class="nav-item" v-if="this.user"><a class="link" @click="logout">退出</a></li>
 				</ul>
 			</div>
 		</div>
@@ -27,27 +25,23 @@ export default {
 	data() {
 		return {
 			user: JSON.parse(localStorage.getItem('user')),
-			keywords:''
+			keywords: ''
 		};
 	},
-	created() {
-	},
+	created() {},
 	methods: {
 		logout() {
 			this.user = null;
 			localStorage.clear();
 		},
-		search(){
-			
-			// this.$router.push({path:'search',query:{keywords:this.keywords}})
-			
-			let currentPath = this.$route.path
-			alert(currentPath)
-			if(currentPath!='/search'||currentPath!='/search/article'||currentPath!='/search/topic'||currentPath!='/search/usere'){
-				this.$router.push({path:'/search',query:{keywords:this.keywords}})
-			}else{
-				this.$router.push({path:'/empty',query:{keywords:this.keywords}})
-	   	}
+		search() {
+			let currentPath = this.$route.path;
+			alert(currentPath);
+			if (currentPath != '/search' || currentPath != '/search/article' || currentPath != '/search/topic' || currentPath != '/search/usere') {
+				this.$router.push({ path: '/search', query: { keywords: this.keywords } });
+			} else {
+				this.$router.push({ path: '/empty', query: { keywords: this.keywords } });
+			}
 		}
 	}
 };

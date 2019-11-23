@@ -7,7 +7,7 @@
 				<input type="password" v-model="userDto.password" />
 				<div class="code-box">
 					<input type="text" v-model="userDto.code" class="code" />
-					<img :src="this.codeUrl" class="verify" @click="refresh" />
+					<img class="verify" @click.prevent="refresh" ref="codeImg" />
 				</div>
 				<input type="button" class="btn btn-lg dark-fill" value="登录" @click="signIn(userDto)" />
 				<router-link to="/sign-up">没有账号？去注册</router-link>
@@ -24,35 +24,29 @@ export default {
 				password: '',
 				code: ''
 			},
-			codeUrl: '',
-			sessionId: ''
+			token: ''
 		};
 	},
 	created() {
-		var number = Math.ceil(Math.random() * 10);
-		this.axios({
-			method: 'get',
-			url: this.GLOBAL.baseUrl + '/code'
-		}).then(res => {
-			console.log(res)
-			this.codeUrl = res.config.url + '?num=' + number;
+		this.axios.get(this.GLOBAL.baseUrl + '/code', { responseType: 'blob' }).then(res => {
+			// console.log(res);
+			var img = this.$refs.codeImg;
+			let url = window.URL.createObjectURL(res.data);
+			img.src = url;
+			console.log(res.headers);
+			//取得后台通过响应头返回的sessionId的值
+			this.token = res.headers['access-token'];
+			console.log(this.token);
 		});
-			this.sessionId = this.$cookies.get('sessionId');
-		console.log(this.sessionId+'$$$$');
 	},
 	methods: {
 		signIn(userDto) {
-			this.sessionId = this.$cookies.get('sessionId');
-			console.log(this.sessionId);
 			this.axios({
 				method: 'post',
 				url: this.GLOBAL.baseUrl + '/user/sign-in',
 				data: JSON.stringify(this.userDto),
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				params: {
-					token: this.sessionId
+					'Access-Token': this.token
 				}
 			}).then(res => {
 				if (res.data.msg === '成功') {
@@ -66,12 +60,11 @@ export default {
 			});
 		},
 		refresh() {
-			var number = Math.ceil(Math.random() * 10);
-			this.axios({
-				method: 'get',
-				url: this.GLOBAL.baseUrl + '/code'
-			}).then(res => {
-				this.codeUrl = res.config.url + '?num=' + number;
+			this.axios.get(this.GLOBAL.baseUrl + '/code', { responseType: 'blob' }).then(res => {
+				console.log(res);
+				var img = this.$refs.codeImg;
+				let url = window.URL.createObjectURL(res.data);
+				img.src = url;
 			});
 		}
 	}
@@ -126,5 +119,9 @@ export default {
 .code {
 	flex: 0 0 40%;
 	height: 40px;
+}
+a {
+	color: #008b8b;
+	font-weight: 700;
 }
 </style>
