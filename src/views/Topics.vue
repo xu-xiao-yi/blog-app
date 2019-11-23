@@ -1,28 +1,22 @@
 <template>
 	<div>
 		<div class="row">
-			<div v-for="(item, index) in topics" :key="index" class="col-12">
-				<div class="media-wraaper">
-					<div class="media-left tx-center gutter">
-						<img :src="item.logo" class="thumnail-xs" />
-						<p>{{ item.topicName }}</p>
+			<div v-for="(item, index) in topics" :key="index" class="col-4 flex flex-center">
+				<div class="card shadow flex flex-top-y">
+					<div class="card-head flex flex-center">
+						<p class="title">{{ item.topicName }}</p>
+						<img :src="item.logo"/>
 					</div>
-					<div class="media-middle">
-						<p class="sub-title">{{ item.description }}</p>
-						<p>
-							<span class="meta gutter">{{ item.articles }}ÆªÎÄÕÂ</span>
-							<span class="meta gutter">{{ item.follows }}ÈË¹Ø×¢</span>
-						</p>
+					<div class="card-body flex flex-left">
+						<p class="sub-title">{{ item.description.slice(0,30) }}</p>
+						<p class="meta">{{ item.articles }}ç¯‡æ–‡ç« ï¼Œ{{ item.fans }}äººå…³æ³¨</p>
 					</div>
-					<div class="media-right"><button class="btn btn-rd warning-fill">¹Ø×¢</button></div>
+					<div><a :href="item.homepage" class="link" @click="go(item.homepage)">ä¸“é¢˜ä¸»é¡µ</a></div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<button class="btn btn-lg btn-rd dark-fill" @click="loadMore">µã»÷¼ÓÔØ¸ü¶à</button>
-		</div>
+		<div class="row"><button class="btn btn-lg btn-rd dark-fill" @click="loadMore">ç‚¹å‡»åŠ è½½æ›´å¤š</button></div>
 	</div>
-	
 </template>
 
 <script>
@@ -31,7 +25,7 @@ export default {
 		return {
 			topics: [],
 			currentPage: 1,
-			count: 5
+			count: 6
 		};
 	},
 	created() {
@@ -39,7 +33,7 @@ export default {
 			.get(this.GLOBAL.baseUrl + '/topic', {
 				params: {
 					page: this.currentPage,
-					count:this.count
+					count: this.count
 				}
 			})
 			.then(res => {
@@ -66,8 +60,44 @@ export default {
 					}
 					console.log(this.topics.length);
 				});
+		},
+		go(page) {
+			window.location.href = page;
 		}
 	}
 };
 </script>
-<style></style>
+<style scoped>
+.card {
+	width: 90%;
+	height: 300px;
+	background-image: url(../assets/img/topic.png);
+	background-size: 100%, 100%;
+	margin-bottom: 50px;
+	padding: 20px;
+}
+.card-head {
+	height: 30%;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.card-head img {
+	width: 80px;
+	height: 80px;
+	border-radius: 10px;
+	margin-left: 20px;
+}
+.card-body {
+	width: 80%;
+	margin: 0 auto;
+}
+.card-body > p {
+	line-height: 30px;
+}
+.card a {
+	color: rgb(0, 98, 89);
+	font-weight: 700;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
 	<div class="row">
 		<div v-for="(item, index) in users" :key="index" class="col-12">
-			<div class="media-wraaper">
+			<div class="media-wraaper shadow">
 				<div class="media-left">
 					<img :src="item.avatar" class="avatar-lg link" />
 					<p>{{ item.nickname }}</p>
@@ -14,7 +14,7 @@
 						<span class="meta gutter">关注了{{ item.follows }}人</span>
 					</p>
 				</div>
-				<div class="media-right"><button class="btn btn-rd warning-fill">关注</button></div>
+				<div class="media-right"><button class="btn btn-lg btn-rd warning-fill">关注</button></div>
 			</div>
 		</div>
 	</div>

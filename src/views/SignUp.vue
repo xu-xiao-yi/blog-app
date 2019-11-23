@@ -49,7 +49,7 @@ export default {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url(../assets/img/40.png);
+	background-image: url(../assets/img/topic.png);
 }
 .login-box {
 	width: 450px;

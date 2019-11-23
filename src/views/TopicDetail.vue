@@ -2,23 +2,22 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-8">
-				<div class="row border">
+				<div class="row border-bottom">
 					<div class="col-3">
 						<img :src="topicVo.logo" class="avatar-lg" />
 						<p class="title">{{ topicVo.topicName }}</p>
 					</div>
 					<div class="col-6">
-						<p class="sub-title">{{ topicVo.description }}</p>
 						<p>
-							<span class="meta gutter">{{ topicVo.articles }}篇文章,</span>
-							<span class="meta">{{ topicVo.follows }}人关注</span>
+							<span class="sub-title">{{ topicVo.articles }}篇文章,</span>
+							<span class="sub-title">{{ topicVo.follows }}人关注</span>
 						</p>
 					</div>
-					<div class="col-3"><button class="btn btn-rd warning-fill">关注</button></div>
+					<div class="col-3"><button class="btn btn-lg btn-rd warning-fill">关注</button></div>
 				</div>
 				<h3 class="title">本专题文章</h3>
 				<dir class="row">
-					<div v-for="(item, index) in topicVo.articleList" :key="index" class="col-12">
+					<div v-for="(item, index) in topicVo.articleList" :key="index" class="col-12 border-bottom">
 						<div class="media-wraaper">
 							<div class="media-left">
 								<img :src="item.avatar" class="avatar-lg link" />
@@ -39,13 +38,22 @@
 					</div>
 				</dir>
 			</div>
-			<div class="col-4 border">
-				<div class="row">
-					<div class="col-12">
-						<img :src="topicVo.logo" class="thumnail-xs" />
-						<p class="sub-title">{{ topicVo.topicName }}</p>
-						<p class="sub-title">{{ topicVo.description }}</p>
-					</div>
+			<div class="col-4">
+				<div class="box border-bottom">
+					<p class="title">专题公告</p>
+					<p class="sub-title">{{ topicVo.description }}</p>
+					<p>
+						<a :href="topicVo.homepage">{{ topicVo.homepage }}</a>
+					</p>
+				</div>
+				<div class="box border-bottom"><p>分享到:微博、微信</p></div>
+				<div class="box border-bottom">
+					<p class="sub-title">管理员</p>
+					<img :src="topicVo.avatar" class="avatar-xs" />
+					<p>{{ topicVo.nickname }}</p>
+				</div>
+				<div class="box border-bottom">
+					<p class="sub-title">关注的人</p>
 				</div>
 			</div>
 		</div>
@@ -71,4 +79,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.box {
+	width: 90%;
+	margin: 0 auto;
+	padding: 10px;
+	min-height: 100px;
+}
+.box > p {
+	line-height: 20px;
+}
+</style>

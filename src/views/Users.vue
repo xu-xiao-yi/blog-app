@@ -2,19 +2,19 @@
 	<div>
 		<div class="row">
 			<div v-for="(item, index) in users" :key="index" class="col-4">
-				<div class="card shadow">
-					<div class="card-head">
+				<div class="card shadow flex flex-top-y">
+					<div class="card-head flex flex-center">
 						<p class="title">{{ item.nickname }}</p>
 						<img :src="item.avatar" />
 					</div>
-					<div class="card-body">
+					<div class="card-body flex flex-left">
 						<p class="sub-title">{{ item.introduction }}</p>
-						<p class="sub-title">
+						<p class="meta">
 							<strong>来自：{{ item.address }}</strong>
 						</p>
 						<p class="meta">{{ item.articles }}篇文章，{{ item.fans }}个粉丝</p>
-						<a :href="item.homepage" class="link" @click="go(item.homepage)">个人主页</a>
 					</div>
+					<div><a :href="item.homepage" class="link" @click="go(item.homepage)">个人主页</a></div>
 				</div>
 			</div>
 		</div>
@@ -64,8 +64,8 @@ export default {
 					console.log(this.users.length);
 				});
 		},
-		go(page){
-			window.location.href = page
+		go(page) {
+			window.location.href = page;
 		}
 	}
 };
@@ -74,9 +74,10 @@ export default {
 .card {
 	width: 90%;
 	height: 300px;
-	background-image: url(../assets/img/44.png);
+	background-image: url(../assets/img/user.png);
 	background-size: 100%, 100%;
 	margin-bottom: 50px;
+	padding: 20px;
 }
 .card-head {
 	height: 30%;
@@ -94,12 +95,12 @@ export default {
 .card-body {
 	width: 80%;
 	margin: 0 auto;
-	/* display: flex; */
-	/* flex-direction: column; */
-	/* justify-content: flex-end; */
-	/* align-items: center; */
 }
 .card-body > p {
 	line-height: 30px;
+}
+.card a {
+	color: rgb(0, 98, 89);
+	font-weight: 700;
 }
 </style>

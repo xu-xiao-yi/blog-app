@@ -1,7 +1,7 @@
 <template>
 	<div class="row">
 		<div v-for="(item, index) in articles" :key="index" class="col-12">
-			<div class="media-wraaper">
+			<div class="media-wraaper shadow">
 				<div class="media-left">
 					<img :src="item.avatar" class="avatar-lg link" />
 					<p>{{ item.nickname }}</p>
@@ -21,7 +21,7 @@
 						<span class="meta">{{ item.likes }}喜欢</span>
 					</p>
 				</div>
-				<div class="media-right"><img :src="item.thumbnail" /></div>
+				<div class="media-right"><img :src="item.thumbnail" class="thumnail-xs"/></div>
 			</div>
 		</div>
 	</div>

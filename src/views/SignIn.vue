@@ -25,21 +25,25 @@ export default {
 				code: ''
 			},
 			codeUrl: '',
-			sessionId:''
+			sessionId: ''
 		};
 	},
 	created() {
 		var number = Math.ceil(Math.random() * 10);
-		this.codeUrl = this.GLOBAL.baseUrl + '/code?num = ' + number;
-		this.sessionId = this.$VueCookies.get('JSESSIONID') 
-		console.log(this.sessionId)
+		this.axios({
+			method: 'get',
+			url: this.GLOBAL.baseUrl + '/code'
+		}).then(res => {
+			console.log(res)
+			this.codeUrl = res.config.url + '?num=' + number;
+		});
+			this.sessionId = this.$cookies.get('sessionId');
+		console.log(this.sessionId+'$$$$');
 	},
 	methods: {
 		signIn(userDto) {
-			var d = this.$document.cookie
-			console.log(JSON.stringify(d))
-			// const token = this.getCookie('JSESSIONID');
-			// console.log(token);
+			this.sessionId = this.$cookies.get('sessionId');
+			console.log(this.sessionId);
 			this.axios({
 				method: 'post',
 				url: this.GLOBAL.baseUrl + '/user/sign-in',
@@ -48,7 +52,7 @@ export default {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
 				params: {
-					token: '123'
+					token: this.sessionId
 				}
 			}).then(res => {
 				if (res.data.msg === '成功') {
@@ -62,27 +66,13 @@ export default {
 			});
 		},
 		refresh() {
-			this.codeUrl = '';
 			var number = Math.ceil(Math.random() * 10);
-			this.codeUrl = this.GLOBAL.baseUrl + '/code?num = ' + number;
-		},
-		//  setCookie(name,value){
-		//     var Days = 1;
-		//     var exp = new Date();
-		//     exp.setTime(exp.getTime() + Days*24*60*60*1000);
-		//     document.cookie = name + "="+ encodeURI (value) + ";expires=" + exp.toGMTString()+";path=/leasingCalculator";
-		// },
-		getCookie(name) {
-			//获取指定名称的cookie的值
-			console.log(document.cookie)
-			let arrStr = document.cookie.split(',');
-			console.log(arrStr)
-			for (var i = 0; i < arrStr.length; i++) {
-				var temp = arrStr[i].split('=');
-				if (temp[0] == name) {
-					return decodeURI(temp[1]);
-				}
-			}
+			this.axios({
+				method: 'get',
+				url: this.GLOBAL.baseUrl + '/code'
+			}).then(res => {
+				this.codeUrl = res.config.url + '?num=' + number;
+			});
 		}
 	}
 };
@@ -94,7 +84,7 @@ export default {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url(../assets/img/40.png);
+	background-image: url(../assets/img/topic.png);
 }
 .login-box {
 	width: 450px;
