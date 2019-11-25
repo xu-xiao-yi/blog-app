@@ -46,7 +46,7 @@ export default {
 				url: this.GLOBAL.baseUrl + '/user/sign-in',
 				data: JSON.stringify(this.userDto),
 				headers: {
-					'Access-Token': this.token
+					'Access-Token': this.token  //将token放在请求头带到后端
 				}
 			}).then(res => {
 				if (res.data.msg === '成功') {

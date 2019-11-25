@@ -10,9 +10,7 @@
 					<li class="nav-item"><input type="text" class="input-box" placeholder="搜索" v-model="keywords" /></li>
 					<li class="nav-item"><button class="btn btn-lg btn-rd dark-border" @click="search">搜索</button></li>
 					<li class="nav-item" v-if="!this.user"><router-link to="/sign-in">登录</router-link></li>
-					<!-- <li class="nav-item" v-if="this.user"> -->
-						<router-link :to="{ path: '/user/' + user.id }" v-if="this.user"><img :src="user.avatar" @mouseenter="this.show = true" class="avatar-lg abs-center-right" /></router-link>
-					<!-- </li> -->
+						<router-link :to="{ path: '/user/' + user.id }" v-if="this.user"><img :src="user.avatar" @mouseenter="this.show = true" class="avatar-xs abs-center-right" /></router-link>
 					<li class="nav-item" v-if="this.user"><a class="link" @click="logout">退出</a></li>
 				</ul>
 			</div>
